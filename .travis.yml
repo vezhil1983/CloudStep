@@ -1,0 +1,16 @@
+sudo: required
+service:
+ - docker
+before_install:
+  - docker build -t vezhil1983/testrepo1 .
+script:
+ - echo "$docker_password" | docker login -u "$docker_username" --password-stdin
+ - docker images # to verify image is build or not
+ - docker push vezhil1983/testrepo1
+notifications:
+ email:
+   recipients:
+     - vezhil1983@gmail.com
+   on_success: always
+   on_failure: always
+
